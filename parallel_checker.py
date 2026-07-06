@@ -4,20 +4,21 @@ import time
 
 start_time = time.perf_counter()
 
-domain_list = ["greenmountains.ae"]##, "yahoo.com", "biorus.ae", "188[.]92[.]255[.]57", "pragmaticus[.]ru"]
+domain_list = ["greenmountains.ae", "yahoo.com", "biorus.ae", "188[.]92[.]255[.]57", "pragmaticus[.]ru"]
 safe_text = "No security vendors flagged this domain as malicious"
 safe_rating = "0"
 suspicious_list = []
-timeout = 5000 ## in ms
 
 with sync_playwright() as p:
     browser = p.chromium.launch()
-    page = browser.new_page()
-    page.set_default_timeout(timeout)
+    pages = []
 
     for dom in domain_list:
+        page = browser.new_page()
         page.goto("https://www.virustotal.com/gui/search?query=" + dom)
-
+        pages.append(page)
+    
+    for page in pages:
         eval_locator = page.locator("div > div.card-header.hstack.flex-wrap.justify-content-between.gap-2 > div.hstack.gap-2.fw-bold[class*='text-']")
         rating_locator = page.locator("#positives")
         eval_locator.wait_for(state="visible")

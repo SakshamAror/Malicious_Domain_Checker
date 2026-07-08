@@ -155,7 +155,7 @@ def main():
                         pages[sub].bring_to_front()
                         bump = True
                         user_intervention = input(f"Task on subject {sub} has timed out, investigate highlighted tab and type " \
-                                            "anything to continue or q to exit: ")
+                                            "anything to continue/try again or q to exit: ")
                         if user_intervention == "q":
                             return
                         pages[sub].reload()

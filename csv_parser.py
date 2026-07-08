@@ -47,7 +47,7 @@ def main():
                 s.write(item.strip() + "\n")
 
 def cla(): # Command line arguments
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         print("File to parse not entered as command line argument")
         print("Usage: python csv_parser_emails.py (filepath to a subjects.csv containing emails with suspicious domains) (col name)")
         quit()
@@ -62,9 +62,10 @@ def cla(): # Command line arguments
     global file
     file = file_path
 
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print("Column name to parse not inputted")
         print("Usage: python csv_parser_emails.py (filepath to a subjects.csv containing emails with suspicious domains) (col name)")
+        quit()
 
     global domain_col_name
     domain_col_name = sys.argv[2]
